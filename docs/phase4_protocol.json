@@ -1,0 +1,11 @@
+{
+  "scope": "Optimized Occupancy System & GA Evaluation (original seven-phase plan)",
+  "subset": "Frozen Phase 3 winner; no new GA search or tuning",
+  "training": "Independently retrain selected model on the same 1462 December 22 rows with unchanged 300-tree parameters",
+  "baseline": "Reuse exact saved Phase 2 baseline",
+  "split": "Reuse exact Phase 2 train/validation/test and embargo assignments",
+  "comparison": "Report input count, accuracy, macro F1, precision/recall, reduction, per-class errors and false-empty errors",
+  "decision": "Retain baseline as default demonstration estimator because it has higher four-class validation macro F1. Expose GA model as explicit compact alternative; no automatic fallback.",
+  "limitations": "Previously seen validation/test data; no new independent confirmation. Later test lacks class 1. Neither estimator is established as reliable for actual control.",
+  "next_phase": "Phase 5 fuzzy controller is not implemented here."
+}

@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "verified": [
+    "Raw files match the source manifest and archive bytes",
+    "All 10129 records and original sensor values preserved",
+    "All aggregates independently recalculated",
+    "Model tables match the audit table and explicit input lists exclude the target",
+    "Class counts, schema, column profiles and timestamp order verified",
+    "Ten PNG and ten SVG plots exist; report links resolve"
+  ]
+}

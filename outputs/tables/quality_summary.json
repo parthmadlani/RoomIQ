@@ -1,0 +1,35 @@
+{
+  "raw_shape": [
+    10129,
+    19
+  ],
+  "processed_shape": [
+    10129,
+    26
+  ],
+  "missing_cells": 0,
+  "exact_duplicate_rows": 0,
+  "duplicate_timestamps": 0,
+  "raw_already_chronological": true,
+  "rows_removed": 0,
+  "values_imputed": 0,
+  "values_clipped": 0,
+  "timestamp_start": "2017-12-22 10:49:41",
+  "timestamp_end": "2018-01-11 09:00:09",
+  "calendar_dates": 7,
+  "median_interval_seconds": 31.0,
+  "gaps_over_60_seconds": 141,
+  "segments_gap_threshold_600_seconds": 4,
+  "constant_numeric_features": [],
+  "all_numeric_finite": true,
+  "pir_values_binary": true,
+  "occupancy_counts": {
+    "0": 8228,
+    "1": 459,
+    "2": 748,
+    "3": 694
+  },
+  "empty_room_percent": 81.23210583473195,
+  "baseline_input_count": 15,
+  "compact_input_count": 6
+}

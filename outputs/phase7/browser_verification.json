@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "date": "2026-10-28",
+  "method": "Interactive browser session against the local server (http://127.0.0.1:8765), launched with the project .venv (Python 3.12.16, requirements.txt versions).",
+  "viewports": [
+    "desktop pane, about 800x600",
+    "mobile emulation, 375x812"
+  ],
+  "checked": [
+    "All five tabs render with no console errors",
+    "Switching tabs returns to the top of the new tab",
+    "Sensor mode with baseline and GA models, validation and later-test examples",
+    "Manual scenario mode (High occupancy + high CO2)",
+    "Recorded-label mismatch note on the false-empty examples (label 3, predicted 0)",
+    "Matching-label note on a correct prediction; note is removed after a reading is edited",
+    "Result scrolls into view after Run simulation when it is off screen",
+    "JSON result generated as roomiq-simulation.json",
+    "Energy evidence partition/policy filters",
+    "Mobile: no page-level horizontal scroll; wide tables scroll inside their cards"
+  ],
+  "not_checked": [
+    "Saving the JSON file to disk (the download was captured in the page, not written)",
+    "Projector resolution on the presentation machine",
+    "Opening the PPTX in native PowerPoint or Keynote"
+  ],
+  "previous_attempt": "The original Phase 7 handoff could not launch a browser; that attempt recorded no visual result."
+}

@@ -1,0 +1,416 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>SC Project: Phase 1</title>
+<style>body{margin:0;background:#eef2f5;color:#172b40;font:16px/1.6 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:38px 24px 70px}header{padding:28px 0 22px;border-bottom:3px solid #2b8a83}
+h1{font-size:36px;line-height:1.2;max-width:900px}h2{font-size:24px}.kicker{font-size:14px;letter-spacing:.12em;color:#2b746f}
+.metrics{display:flex;gap:16px;flex-wrap:wrap;margin:24px 0}.metric{background:#fff;padding:20px 24px;flex:1}
+.metric strong{display:block;font-size:30px}.metric span{color:#526779}
+section{background:white;padding:24px;margin:24px 0;border-radius:8px}section img{width:100%;height:auto;display:block;margin-top:18px}
+table{border-collapse:collapse;font-size:13px;width:100%}th,td{border-bottom:1px solid #dee5eb;padding:9px;text-align:left}
+th{background:#edf5f4}a{color:#166e75}.scroll{overflow:auto}.note{border-left:4px solid #da9439;padding-left:18px}
+@media print{body{background:white}section{break-inside:avoid;padding:8px 0}main{padding:0}.scroll{overflow:visible}}
+</style></head><body><main><header><div class="kicker">SOFT COMPUTING MINOR PROJECT / PHASE 1</div>
+<h1>Adaptive Smart Room Occupancy &amp; Energy Controller</h1>
+<p>Dataset preparation and exploration. No model training, GA, fuzzy control or energy estimates.</p></header><div class="metrics"><div class="metric"><strong>10,129</strong><span>recorded observations</span></div>
+<div class="metric"><strong>0–3</strong><span>people: target classes</span></div>
+<div class="metric"><strong>81.23%</strong><span>empty-room rows</span></div>
+<div class="metric"><strong>0</strong><span>missing cells or duplicate rows</span></div></div>
+<section><h2>What was prepared</h2><p>The original UCI ZIP and CSV are preserved with checksums.
+The processed data keep all rows and add timestamp traceability, recording segments and four
+aggregate indicators. No values were imputed or clipped.</p>
+<p class="note">The CSV spans seven calendar dates with recording gaps. Class coverage differs by
+date. A future evaluation must account for both time and the four occupancy classes.</p>
+<p><a href="../docs/phase1_notes.md">Detailed notes and viva explanation</a> /
+<a href="../docs/candidate_features.md">Candidate feature rationale</a> /
+<a href="../docs/data_dictionary.md">Data dictionary</a> /
+<a href="../README.md">Run instructions</a></p></section>
+<section><h2>Occupancy counts</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>occupancy</th>
+      <th>rows</th>
+      <th>percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>8228</td>
+      <td>81.23</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>459</td>
+      <td>4.53</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>748</td>
+      <td>7.38</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>694</td>
+      <td>6.85</td>
+    </tr>
+  </tbody>
+</table></section><section><h2>Class balance</h2><p>Empty-room readings dominate; accuracy alone is insufficient.</p><img src="plots/01_occupancy_distribution.png" alt="Class balance"></section><section><h2>CO2 and supplied trend</h2><p>The supplied slope is excluded from the recommended baseline pending window verification.</p><img src="plots/02_co2_by_occupancy.png" alt="CO2 and supplied trend"></section><section><h2>Motion and occupancy</h2><p>Rates are within each occupancy class. Motion is not a people count.</p><img src="plots/03_pir_by_occupancy.png" alt="Motion and occupancy"></section><section><h2>Light</h2><p>Separate positions can carry different information.</p><img src="plots/04_light_by_occupancy.png" alt="Light"></section><section><h2>Sound</h2><p>Values are amplifier volts, not decibels. Unusual readings are retained.</p><img src="plots/05_sound_by_occupancy.png" alt="Sound"></section><section><h2>Temperature</h2><p>Temperature changes slowly and can reflect ambient conditions.</p><img src="plots/06_temperature_by_occupancy.png" alt="Temperature"></section><section><h2>Correlation matrix</h2><p>Strong sensor-to-sensor association can indicate redundancy.</p><img src="plots/07_correlation_matrix.png" alt="Correlation matrix"></section><section><h2>Feature associations</h2><p>Pearson measures linear association; Spearman measures rank association. Neither is predictive importance.</p><img src="plots/08_feature_target_associations.png" alt="Feature associations"></section><section><h2>Recording timeline</h2><p>No data are inserted into the gaps.</p><img src="plots/09_recording_timeline.png" alt="Recording timeline"></section><section><h2>Class coverage across dates</h2><p>Class 1 occurs only on the first two dates. A simple late holdout will not evaluate all classes.</p><img src="plots/10_occupancy_by_date.png" alt="Class coverage across dates"></section><section><h2>Recommended Phase 2 inputs: 15 direct channels</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>candidate_input</th>
+      <th>unit</th>
+      <th>reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S1_Temp</td>
+      <td>degrees C</td>
+      <td>Local temperature and spatial variation; also sensitive to ambient conditions.</td>
+    </tr>
+    <tr>
+      <td>S2_Temp</td>
+      <td>degrees C</td>
+      <td>Local temperature and spatial variation; also sensitive to ambient conditions.</td>
+    </tr>
+    <tr>
+      <td>S3_Temp</td>
+      <td>degrees C</td>
+      <td>Local temperature and spatial variation; also sensitive to ambient conditions.</td>
+    </tr>
+    <tr>
+      <td>S4_Temp</td>
+      <td>degrees C</td>
+      <td>Local temperature and spatial variation; also sensitive to ambient conditions.</td>
+    </tr>
+    <tr>
+      <td>S1_Light</td>
+      <td>lux</td>
+      <td>Local light information; association may depend on this room's lighting habits.</td>
+    </tr>
+    <tr>
+      <td>S2_Light</td>
+      <td>lux</td>
+      <td>Local light information; association may depend on this room's lighting habits.</td>
+    </tr>
+    <tr>
+      <td>S3_Light</td>
+      <td>lux</td>
+      <td>Local light information; association may depend on this room's lighting habits.</td>
+    </tr>
+    <tr>
+      <td>S4_Light</td>
+      <td>lux</td>
+      <td>Local light information; association may depend on this room's lighting habits.</td>
+    </tr>
+    <tr>
+      <td>S1_Sound</td>
+      <td>V</td>
+      <td>Local activity; amplifier voltage is not decibels.</td>
+    </tr>
+    <tr>
+      <td>S2_Sound</td>
+      <td>V</td>
+      <td>Local activity; amplifier voltage is not decibels.</td>
+    </tr>
+    <tr>
+      <td>S3_Sound</td>
+      <td>V</td>
+      <td>Local activity; amplifier voltage is not decibels.</td>
+    </tr>
+    <tr>
+      <td>S4_Sound</td>
+      <td>V</td>
+      <td>Local activity; amplifier voltage is not decibels.</td>
+    </tr>
+    <tr>
+      <td>S5_CO2</td>
+      <td>ppm</td>
+      <td>Direct CO2 concentration; may lag arrivals and persist after departures.</td>
+    </tr>
+    <tr>
+      <td>S6_PIR</td>
+      <td>0/1</td>
+      <td>Motion coverage at this location; zero does not prove the room is empty.</td>
+    </tr>
+    <tr>
+      <td>S7_PIR</td>
+      <td>0/1</td>
+      <td>Motion coverage at this location; zero does not prove the room is empty.</td>
+    </tr>
+  </tbody>
+</table><p>Optional six-input comparison: Avg_Temp, Avg_Light, Avg_Sound, S5_CO2,
+S6_PIR and S7_PIR. Averages still require all their underlying physical sensors.</p>
+<p>The target, timestamp fields and audit IDs are excluded from inputs. No train/test split
+has been created. All rows were used for descriptive EDA.</p></section>
+<section><h2>Every original column</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>column</th>
+      <th>role</th>
+      <th>raw_dtype</th>
+      <th>processed_dtype</th>
+      <th>units</th>
+      <th>missing</th>
+      <th>unique_values</th>
+      <th>min</th>
+      <th>max</th>
+      <th>example</th>
+      <th>meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Date</td>
+      <td>metadata</td>
+      <td>object</td>
+      <td>object</td>
+      <td>YYYY/MM/DD</td>
+      <td>0</td>
+      <td>7</td>
+      <td>2017/12/22</td>
+      <td>2018/01/11</td>
+      <td>2017/12/22</td>
+      <td>Recorded date; metadata only</td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td>metadata</td>
+      <td>object</td>
+      <td>object</td>
+      <td>HH:MM:SS</td>
+      <td>0</td>
+      <td>10129</td>
+      <td>00:00:28</td>
+      <td>23:59:58</td>
+      <td>10:49:41</td>
+      <td>Recorded time; timezone not supplied</td>
+    </tr>
+    <tr>
+      <td>S1_Temp</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>degrees C</td>
+      <td>0</td>
+      <td>24</td>
+      <td>24.94</td>
+      <td>26.38</td>
+      <td>24.94</td>
+      <td>Temperature at node S1</td>
+    </tr>
+    <tr>
+      <td>S2_Temp</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>degrees C</td>
+      <td>0</td>
+      <td>69</td>
+      <td>24.75</td>
+      <td>29.0</td>
+      <td>24.75</td>
+      <td>Temperature at node S2</td>
+    </tr>
+    <tr>
+      <td>S3_Temp</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>degrees C</td>
+      <td>0</td>
+      <td>29</td>
+      <td>24.44</td>
+      <td>26.19</td>
+      <td>24.56</td>
+      <td>Temperature at node S3</td>
+    </tr>
+    <tr>
+      <td>S4_Temp</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>degrees C</td>
+      <td>0</td>
+      <td>27</td>
+      <td>24.94</td>
+      <td>26.56</td>
+      <td>25.38</td>
+      <td>Temperature at node S4</td>
+    </tr>
+    <tr>
+      <td>S1_Light</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>lux</td>
+      <td>0</td>
+      <td>68</td>
+      <td>0</td>
+      <td>165</td>
+      <td>121</td>
+      <td>Light at node S1</td>
+    </tr>
+    <tr>
+      <td>S2_Light</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>lux</td>
+      <td>0</td>
+      <td>82</td>
+      <td>0</td>
+      <td>258</td>
+      <td>34</td>
+      <td>Light at node S2</td>
+    </tr>
+    <tr>
+      <td>S3_Light</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>lux</td>
+      <td>0</td>
+      <td>177</td>
+      <td>0</td>
+      <td>280</td>
+      <td>53</td>
+      <td>Light at node S3</td>
+    </tr>
+    <tr>
+      <td>S4_Light</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>lux</td>
+      <td>0</td>
+      <td>75</td>
+      <td>0</td>
+      <td>74</td>
+      <td>40</td>
+      <td>Light at node S4</td>
+    </tr>
+    <tr>
+      <td>S1_Sound</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>V</td>
+      <td>0</td>
+      <td>231</td>
+      <td>0.06</td>
+      <td>3.88</td>
+      <td>0.08</td>
+      <td>Sound amplifier voltage at node S1, not decibels</td>
+    </tr>
+    <tr>
+      <td>S2_Sound</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>V</td>
+      <td>0</td>
+      <td>185</td>
+      <td>0.04</td>
+      <td>3.44</td>
+      <td>0.19</td>
+      <td>Sound amplifier voltage at node S2, not decibels</td>
+    </tr>
+    <tr>
+      <td>S3_Sound</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>V</td>
+      <td>0</td>
+      <td>258</td>
+      <td>0.04</td>
+      <td>3.67</td>
+      <td>0.06</td>
+      <td>Sound amplifier voltage at node S3, not decibels</td>
+    </tr>
+    <tr>
+      <td>S4_Sound</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>V</td>
+      <td>0</td>
+      <td>106</td>
+      <td>0.05</td>
+      <td>3.4</td>
+      <td>0.06</td>
+      <td>Sound amplifier voltage at node S4, not decibels</td>
+    </tr>
+    <tr>
+      <td>S5_CO2</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>ppm</td>
+      <td>0</td>
+      <td>186</td>
+      <td>345</td>
+      <td>1270</td>
+      <td>390</td>
+      <td>CO2 concentration at node S5</td>
+    </tr>
+    <tr>
+      <td>S5_CO2_Slope</td>
+      <td>sensor_related</td>
+      <td>float64</td>
+      <td>float64</td>
+      <td>unspecified</td>
+      <td>0</td>
+      <td>1579</td>
+      <td>-6.296154</td>
+      <td>8.980769</td>
+      <td>0.769231</td>
+      <td>Supplied CO2 window slope; alignment and time units unverified</td>
+    </tr>
+    <tr>
+      <td>S6_PIR</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>0/1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Motion detection at node S6; not a count of people</td>
+    </tr>
+    <tr>
+      <td>S7_PIR</td>
+      <td>sensor_related</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>0/1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Motion detection at node S7; not a count of people</td>
+    </tr>
+    <tr>
+      <td>Room_Occupancy_Count</td>
+      <td>target</td>
+      <td>int64</td>
+      <td>int64</td>
+      <td>people</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>Manually recorded occupancy class, 0 to 3</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>Source and limits</h2><p>Singh, A. &amp; Chaudhari, S. (2018).
+<a href="https://doi.org/10.24432/C5P605">Room Occupancy Estimation, UCI Machine Learning Repository</a>.
+CC BY 4.0. Original source details and hashes are in data/raw/source_manifest.json.</p>
+<p>This is occupancy data from one setup. There are no measured electricity labels.
+Future energy savings must be explicitly simulated. Performance in other rooms remains
+unverified.</p></section></main></body></html>

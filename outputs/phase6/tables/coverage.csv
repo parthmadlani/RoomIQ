@@ -1,0 +1,5 @@
+status,interval_rows,known_elapsed_seconds,accounted_seconds
+eligible,9950,304850.0,304850.0
+recording_gap_over_60s,141,1415445.0,0.0
+touches_embargo,37,1133.0,0.0
+final_row_unknown_duration,1,0.0,0.0

@@ -1,0 +1,14 @@
+{
+  "config_sha256": "d0041031f20af850911557d20c6e3479f51c045d42701496b3b2b9474d62e05b",
+  "fuzzy_config_sha256": "b82813c2fb1fde4f9fe043d831168c85871b11a8de3dd1770aac26503b3d7551",
+  "phase4_registry_sha256": "0e5162c7b6a1f446d6ef368f0a1691ae24c5b8aab5fd06748c3bd5529be9bab2",
+  "data_sha256": "a76c3179c29d0ac003a3811eab76ea48fb44f299433eb8fb8c0e773327efe4f9",
+  "split_sha256": "14bd422d854e2b1b85b895d03eab489f76f8efbd94ad2b9b61107eec3e0d58f5",
+  "eligible_intervals": 9950,
+  "covered_hours": 84.68055555555556,
+  "known_span_hours": 478.1744444444444,
+  "source_rows": 10129,
+  "simulation_rows": 119400,
+  "numpy": "2.3.5",
+  "pandas": "2.2.3"
+}

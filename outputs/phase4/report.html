@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SC Project: Phase 4</title><style>
+body{background:#eef2f5;color:#172b40;font:16px/1.6 system-ui;margin:0}main{max-width:1100px;margin:auto;padding:35px 24px}
+section{background:white;border-radius:8px;padding:24px;margin:24px 0}img{width:100%;height:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:9px;border-bottom:1px solid #dde4e8;text-align:left}
+th{background:#e8f2f1}.scroll{overflow:auto}a{color:#166e75}.note{border-left:4px solid #da9439;padding-left:18px}
+</style><body><main><p>SOFT COMPUTING MINOR PROJECT / PHASE 4</p><h1>Does GA improve the occupancy system?</h1>
+<section><h2>Fewer inputs, lower validation performance</h2><p>Inputs: <strong>15 → 4 (73.33% reduction)</strong>.
+Validation macro F1: <strong>0.8608 → 0.7952</strong>.
+Baseline remains the default demonstration model; GA is an explicit compact alternative.</p>
+<p class="note">Both models predict empty on 184 of 294 occupied
+later-test observations (62.59%). Input reduction does not resolve this limitation.
+The later test lacks class 1. These previously seen data are not a new independent confirmation.</p>
+<p><a href="../../docs/phase4_notes.md">Methods and viva notes</a> /
+<a href="../../models/phase4/evaluation_decision.json">Evaluation decision</a> /
+<a href="../../docs/project_roadmap.md">Seven-phase roadmap</a></p></section>
+<section><h2>Formal comparison</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>input_channels</th>
+      <th>source_nodes</th>
+      <th>input_reduction_percent</th>
+      <th>validation_accuracy_percent</th>
+      <th>validation_macro_f1</th>
+      <th>later_test_accuracy_percent</th>
+      <th>later_test_balanced_accuracy_percent</th>
+      <th>later_test_false_empty_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>baseline</td>
+      <td>15</td>
+      <td>7</td>
+      <td>0.0000</td>
+      <td>94.9638</td>
+      <td>0.8608</td>
+      <td>95.3152</td>
+      <td>38.9879</td>
+      <td>62.585</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>4</td>
+      <td>4</td>
+      <td>73.3333</td>
+      <td>92.7899</td>
+      <td>0.7952</td>
+      <td>95.3663</td>
+      <td>40.8335</td>
+      <td>62.585</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>Accuracy and reduction columns are percentages; macro F1 is a fraction.
+Node counts describe data dependencies, not physical removal or power savings.</p></section>
+<section><h2>Inputs and source nodes</h2><img src="plots/input_reduction.png" alt="Inputs and source nodes"></section><section><h2>Performance comparison</h2><img src="plots/performance_comparison.png" alt="Performance comparison"></section><section><h2>Recall of each occupancy class</h2><img src="plots/per_class_recall.png" alt="Recall of each occupancy class"></section><section><h2>Occupied rooms predicted empty</h2><img src="plots/false_empty_comparison.png" alt="Occupied rooms predicted empty"></section><section><h2>Validation confusion matrices</h2><img src="plots/validation_confusion_comparison.png" alt="Validation confusion matrices"></section><section><h2>Later-test confusion matrices</h2><img src="plots/test_confusion_comparison.png" alt="Later-test confusion matrices"></section><section><h2>Reproducible occupancy system</h2><p>A fresh four-input, 300-tree fit reproduces
+Phase 3 predictions and probabilities. The unchanged baseline and fresh GA model are available through
+one interface with explicit input validation and model choice. No fuzzy control or energy layer
+has been implemented.</p></section></main></body></html>

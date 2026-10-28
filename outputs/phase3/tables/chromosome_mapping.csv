@@ -1,0 +1,16 @@
+bit_position,feature,selected
+1,S1_Temp,0
+2,S2_Temp,0
+3,S3_Temp,0
+4,S4_Temp,0
+5,S1_Light,1
+6,S2_Light,0
+7,S3_Light,0
+8,S4_Light,0
+9,S1_Sound,0
+10,S2_Sound,0
+11,S3_Sound,0
+12,S4_Sound,0
+13,S5_CO2,1
+14,S6_PIR,1
+15,S7_PIR,1

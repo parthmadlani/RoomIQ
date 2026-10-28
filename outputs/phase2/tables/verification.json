@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "training_rows": 1462,
+  "validation_rows": 2760,
+  "test_rows": 5870,
+  "embargo_rows": 37,
+  "disjoint_chronological_partitions": true,
+  "at_least_ten_minutes_between_partitions": true,
+  "raw_feature_and_label_match": true,
+  "saved_model_predictions_match": true,
+  "probabilities_sum_to_one": true,
+  "no_target_or_timestamp_in_model_inputs": true
+}

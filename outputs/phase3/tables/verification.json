@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Earlier baseline and data hashes preserved",
+    "All GA folds confined to training day with 10-minute purges and exact OOF coverage",
+    "All cached fitness values, selected winner, population sizes and elite preservation verified",
+    "Selected and reference inner scores independently reproduced from eight fresh fold fits",
+    "Operator mutation, copying, empty repair and seeded reproducibility checked",
+    "External metrics recomputed; baseline predictions match Phase 2",
+    "Selected model predictions and probabilities verified",
+    "Selected-input inference works and rejects a missing selected feature",
+    "Report links resolve"
+  ]
+}

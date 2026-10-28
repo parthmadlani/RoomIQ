@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "intervals_verified": 9950,
+  "simulation_rows_verified": 119400,
+  "summary_rows_verified": 48,
+  "checks": [
+    "Every interval independently classified; gaps, embargo and final unknown duration excluded",
+    "All 12 source/policy runs use identical unique eligible source rows",
+    "Both model predictions and true-label reference verified",
+    "Every mode, guard, applied request, power and interval kWh independently recalculated",
+    "All summary, mode-duration, transition, error-proxy and sensitivity values reconciled",
+    "Known watt-hour examples and boundary/invalid inputs tested",
+    "Both integrated CSV interfaces exercised and overwrite refusal tested",
+    "Earlier configs/data/models remain referenced by verified hashes; report links resolve"
+  ]
+}

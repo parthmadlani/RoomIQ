@@ -1,0 +1,51 @@
+{
+  "features": [
+    "S1_Light",
+    "S5_CO2",
+    "S6_PIR",
+    "S7_PIR"
+  ],
+  "classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "target": "Room_Occupancy_Count",
+  "parameters": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "class_weight": "balanced_subsample",
+    "criterion": "gini",
+    "max_depth": null,
+    "max_features": "sqrt",
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 2,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 300,
+    "n_jobs": 1,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "model_sha256": "63c2eaa9eed5da6a6c67949533aeb944cd2b89dcc71963ba24211e5c47b5479c",
+  "processed_data_sha256": "a76c3179c29d0ac003a3811eab76ea48fb44f299433eb8fb8c0e773327efe4f9",
+  "phase2_model_sha256": "ed33a7ad67b61589431b5506df200d85547643c315a2cd5d9b20e54e53c6c4b1",
+  "selection_sha256": "06326410ade3d72cd8cbbcd03b609ae400995bad206506750c9e2f6ef47cb26b",
+  "protocol_sha256": "75595cf65c4f35bdb1f67875e5e49122f022b4efaf9b1251ad95156bdf6b4c66",
+  "split_manifest_sha256": "14bd422d854e2b1b85b895d03eab489f76f8efbd94ad2b9b61107eec3e0d58f5",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.7.2",
+    "joblib": "1.5.2"
+  },
+  "training_rows": 1462,
+  "notes": "Selection uses December 22 only. Final model trained on that same day with 300 trees."
+}

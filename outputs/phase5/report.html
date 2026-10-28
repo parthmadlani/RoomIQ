@@ -1,0 +1,588 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SC Project: Phase 5</title><style>
+body{background:#eef2f5;color:#172b40;font:16px/1.6 system-ui;margin:0}main{max-width:1100px;margin:auto;padding:35px 24px}
+section{background:white;border-radius:8px;padding:24px;margin:24px 0}img{width:100%;height:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:9px;border-bottom:1px solid #dde4e8;text-align:left}
+th{background:#e8f2f1}.scroll{overflow:auto}a{color:#166e75}.note{border-left:4px solid #da9439;padding-left:18px}
+</style><body><main><p>SOFT COMPUTING MINOR PROJECT / PHASE 5</p><h1>Mamdani fuzzy room controller</h1>
+<section><h2>Four environmental inputs, two control requests</h2><p>Occupancy, temperature, light and CO2 feed
+34 explainable rules. MIN combines conditions, clipping applies rules, MAX combines outputs,
+and centroid defuzzification produces lighting and ventilation percentages.</p>
+<p class="note">Illustrative thresholds and static requests only. No actual equipment control or measured
+energy savings. Occupancy errors still propagate. The compact estimator-plus-controller needs five
+channels, including an additional temperature measurement.</p>
+<p><a href="../../docs/phase5_notes.md">Method and viva notes</a> /
+<a href="../../config/phase5_fuzzy.json">Memberships and rules</a> /
+<a href="scenario_traces.json">Worked rule traces</a></p></section>
+<section><h2>Scenarios</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>scenario</th>
+      <th>occupancy</th>
+      <th>temperature</th>
+      <th>light</th>
+      <th>co2</th>
+      <th>lighting_percent</th>
+      <th>ventilation_percent</th>
+      <th>raw_lighting_centroid</th>
+      <th>exact_off</th>
+      <th>clipped_inputs</th>
+      <th>fired_rules</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>empty_dark_fresh</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>0</td>
+      <td>450</td>
+      <td>0.000</td>
+      <td>3.333</td>
+      <td>3.333</td>
+      <td>True</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>empty_dark_poor_co2</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>0</td>
+      <td>1600</td>
+      <td>0.000</td>
+      <td>90.000</td>
+      <td>3.333</td>
+      <td>True</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>one_person_dark</td>
+      <td>1.0</td>
+      <td>24</td>
+      <td>20</td>
+      <td>450</td>
+      <td>50.000</td>
+      <td>25.000</td>
+      <td>50.000</td>
+      <td>False</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>three_people_dark</td>
+      <td>3.0</td>
+      <td>24</td>
+      <td>20</td>
+      <td>450</td>
+      <td>90.000</td>
+      <td>55.000</td>
+      <td>90.000</td>
+      <td>False</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>three_people_bright</td>
+      <td>3.0</td>
+      <td>24</td>
+      <td>700</td>
+      <td>450</td>
+      <td>3.333</td>
+      <td>55.000</td>
+      <td>3.333</td>
+      <td>False</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>crowded_hot_poor_co2</td>
+      <td>3.0</td>
+      <td>32</td>
+      <td>20</td>
+      <td>1600</td>
+      <td>90.000</td>
+      <td>90.000</td>
+      <td>90.000</td>
+      <td>False</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>one_person_bright</td>
+      <td>1.0</td>
+      <td>24</td>
+      <td>700</td>
+      <td>450</td>
+      <td>3.333</td>
+      <td>25.000</td>
+      <td>3.333</td>
+      <td>False</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>empty_hot_fresh</td>
+      <td>0.0</td>
+      <td>35</td>
+      <td>20</td>
+      <td>450</td>
+      <td>0.000</td>
+      <td>3.333</td>
+      <td>3.333</td>
+      <td>True</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>occupied_cool_fresh</td>
+      <td>2.0</td>
+      <td>16</td>
+      <td>200</td>
+      <td>450</td>
+      <td>50.000</td>
+      <td>55.000</td>
+      <td>50.000</td>
+      <td>False</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>overlapping_memberships</td>
+      <td>1.5</td>
+      <td>27</td>
+      <td>100</td>
+      <td>1150</td>
+      <td>53.742</td>
+      <td>66.469</td>
+      <td>53.742</td>
+      <td>False</td>
+      <td>0</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>above_domain_clipped</td>
+      <td>3.0</td>
+      <td>45</td>
+      <td>1200</td>
+      <td>2500</td>
+      <td>3.333</td>
+      <td>90.000</td>
+      <td>3.333</td>
+      <td>False</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>The raw lighting centroid remains visible. Exact zero at occupancy zero is a separate
+postprocessing gate. Environmental clipping is counted rather than hidden.</p></section>
+<section><h2>Input membership functions</h2><img src="plots/input_memberships.png" alt="Input membership functions"></section><section><h2>Output membership functions</h2><img src="plots/output_memberships.png" alt="Output membership functions"></section><section><h2>Lighting response surface</h2><img src="plots/lighting_response.png" alt="Lighting response surface"></section><section><h2>Ventilation response surface</h2><img src="plots/ventilation_response.png" alt="Ventilation response surface"></section><section><h2>Worked clipping, aggregation and centroids</h2><img src="plots/worked_defuzzification.png" alt="Worked clipping, aggregation and centroids"></section><section><h2>Scenario results</h2><img src="plots/scenario_comparison.png" alt="Scenario results"></section><section><h2>Real-row integration examples</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>Source_Row</th>
+      <th>true_occupancy</th>
+      <th>predicted_occupancy</th>
+      <th>temperature</th>
+      <th>light</th>
+      <th>co2</th>
+      <th>lighting_percent</th>
+      <th>ventilation_percent</th>
+      <th>true_label_reference_lighting</th>
+      <th>true_label_reference_ventilation</th>
+      <th>clipped_inputs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>baseline</td>
+      <td>1483</td>
+      <td>0</td>
+      <td>0</td>
+      <td>25.38</td>
+      <td>0</td>
+      <td>380</td>
+      <td>0.000</td>
+      <td>3.628</td>
+      <td>0.000</td>
+      <td>3.628</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>baseline</td>
+      <td>2834</td>
+      <td>1</td>
+      <td>1</td>
+      <td>25.19</td>
+      <td>93</td>
+      <td>360</td>
+      <td>40.854</td>
+      <td>25.000</td>
+      <td>40.854</td>
+      <td>25.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>baseline</td>
+      <td>2950</td>
+      <td>2</td>
+      <td>2</td>
+      <td>25.69</td>
+      <td>123</td>
+      <td>380</td>
+      <td>60.065</td>
+      <td>55.000</td>
+      <td>60.065</td>
+      <td>55.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>baseline</td>
+      <td>3497</td>
+      <td>3</td>
+      <td>2</td>
+      <td>26.19</td>
+      <td>124</td>
+      <td>760</td>
+      <td>59.743</td>
+      <td>74.403</td>
+      <td>59.743</td>
+      <td>74.403</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>baseline</td>
+      <td>8086</td>
+      <td>3</td>
+      <td>0</td>
+      <td>25.50</td>
+      <td>10</td>
+      <td>370</td>
+      <td>0.000</td>
+      <td>3.674</td>
+      <td>90.000</td>
+      <td>55.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>baseline</td>
+      <td>8087</td>
+      <td>3</td>
+      <td>0</td>
+      <td>25.50</td>
+      <td>10</td>
+      <td>370</td>
+      <td>0.000</td>
+      <td>3.674</td>
+      <td>90.000</td>
+      <td>55.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>1483</td>
+      <td>0</td>
+      <td>0</td>
+      <td>25.38</td>
+      <td>0</td>
+      <td>380</td>
+      <td>0.000</td>
+      <td>3.628</td>
+      <td>0.000</td>
+      <td>3.628</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>2834</td>
+      <td>1</td>
+      <td>1</td>
+      <td>25.19</td>
+      <td>93</td>
+      <td>360</td>
+      <td>40.854</td>
+      <td>25.000</td>
+      <td>40.854</td>
+      <td>25.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>2950</td>
+      <td>2</td>
+      <td>1</td>
+      <td>25.69</td>
+      <td>123</td>
+      <td>380</td>
+      <td>33.059</td>
+      <td>25.000</td>
+      <td>60.065</td>
+      <td>55.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>3497</td>
+      <td>3</td>
+      <td>2</td>
+      <td>26.19</td>
+      <td>124</td>
+      <td>760</td>
+      <td>59.743</td>
+      <td>74.403</td>
+      <td>59.743</td>
+      <td>74.403</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>8086</td>
+      <td>3</td>
+      <td>0</td>
+      <td>25.50</td>
+      <td>10</td>
+      <td>370</td>
+      <td>0.000</td>
+      <td>3.674</td>
+      <td>90.000</td>
+      <td>55.000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>8087</td>
+      <td>3</td>
+      <td>0</td>
+      <td>25.50</td>
+      <td>10</td>
+      <td>370</td>
+      <td>0.000</td>
+      <td>3.674</td>
+      <td>90.000</td>
+      <td>55.000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>The true-label reference is the same rules with known occupancy for illustration, not a measured
+correct control action. These selected examples are not an independent evaluation.</p></section>
+<section><h2>Rule base</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>output</th>
+      <th>antecedent</th>
+      <th>consequent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>L01</td>
+      <td>lighting</td>
+      <td>occupancy is empty</td>
+      <td>off</td>
+    </tr>
+    <tr>
+      <td>L02</td>
+      <td>lighting</td>
+      <td>occupancy is low AND light is dark</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>L03</td>
+      <td>lighting</td>
+      <td>occupancy is low AND light is adequate</td>
+      <td>dim</td>
+    </tr>
+    <tr>
+      <td>L04</td>
+      <td>lighting</td>
+      <td>occupancy is low AND light is bright</td>
+      <td>off</td>
+    </tr>
+    <tr>
+      <td>L05</td>
+      <td>lighting</td>
+      <td>occupancy is high AND light is dark</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>L06</td>
+      <td>lighting</td>
+      <td>occupancy is high AND light is adequate</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>L07</td>
+      <td>lighting</td>
+      <td>occupancy is high AND light is bright</td>
+      <td>off</td>
+    </tr>
+    <tr>
+      <td>V01</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is fresh AND temperature is cool</td>
+      <td>idle</td>
+    </tr>
+    <tr>
+      <td>V02</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is fresh AND temperature is comfortable</td>
+      <td>idle</td>
+    </tr>
+    <tr>
+      <td>V03</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is fresh AND temperature is hot</td>
+      <td>idle</td>
+    </tr>
+    <tr>
+      <td>V04</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is moderate AND temperature is cool</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V05</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is moderate AND temperature is comfortable</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V06</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is moderate AND temperature is hot</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V07</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is poor AND temperature is cool</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V08</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is poor AND temperature is comfortable</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V09</td>
+      <td>ventilation</td>
+      <td>occupancy is empty AND co2 is poor AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V10</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is fresh AND temperature is cool</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <td>V11</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is fresh AND temperature is comfortable</td>
+      <td>low</td>
+    </tr>
+    <tr>
+      <td>V12</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is fresh AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V13</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is moderate AND temperature is cool</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V14</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is moderate AND temperature is comfortable</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V15</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is moderate AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V16</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is poor AND temperature is cool</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V17</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is poor AND temperature is comfortable</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V18</td>
+      <td>ventilation</td>
+      <td>occupancy is low AND co2 is poor AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V19</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is fresh AND temperature is cool</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V20</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is fresh AND temperature is comfortable</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>V21</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is fresh AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V22</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is moderate AND temperature is cool</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V23</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is moderate AND temperature is comfortable</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V24</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is moderate AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V25</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is poor AND temperature is cool</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V26</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is poor AND temperature is comfortable</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <td>V27</td>
+      <td>ventilation</td>
+      <td>occupancy is high AND co2 is poor AND temperature is hot</td>
+      <td>high</td>
+    </tr>
+  </tbody>
+</table></section>
+<section><h2>Next phase</h2><p>Phase 6 adds simulated energy estimates using declared appliance powers.
+No energy calculations or adaptive modes are included in Phase 5.</p></section></main></body></html>

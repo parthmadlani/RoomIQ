@@ -1,0 +1,22 @@
+{
+  "seed": 42,
+  "target": "Room_Occupancy_Count",
+  "feature_spec": "docs/feature_spec.json",
+  "train_before": "2017-12-23 00:00:00",
+  "validation_start": "2017-12-23 00:10:00",
+  "validation_before": "2017-12-24 00:00:00",
+  "test_start": "2017-12-24 00:10:00",
+  "embargo_minutes": 10,
+  "reason": "Calendar boundaries chosen from Phase 1 coverage before fitting. A pragmatic 10-minute buffer reduces immediate adjacency; it does not prove independence. No sliding-window features used.",
+  "estimator": {
+    "n_estimators": 300,
+    "min_samples_leaf": 2,
+    "max_features": "sqrt",
+    "class_weight": "balanced_subsample",
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "selection": "Fixed baseline, no tuning or feature selection. Training only on Dec 22; no refit after validation.",
+  "test_limitation": "No true class 1 in later test. Entire dataset was previously explored in Phase 1. Later test is held out from fitting, not from prior EDA.",
+  "future_use": "Phase 3 must use training-only temporal CV for GA fitness; do not optimize against the reported test."
+}

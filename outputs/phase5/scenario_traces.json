@@ -1,0 +1,793 @@
+{
+  "empty_dark_fresh": {
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.3329999999999997,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.3329999999999997
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 24.0,
+      "light": 0.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 1.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 1.0
+      }
+    ]
+  },
+  "empty_dark_poor_co2": {
+    "lighting_percent": 0.0,
+    "ventilation_percent": 90.00011111111111,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 90.00011111111111
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 24.0,
+      "light": 0.0,
+      "co2": 1600.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 1.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 0.0,
+        "moderate": 0.0,
+        "poor": 1.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V08",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "poor",
+          "temperature": "comfortable"
+        },
+        "then": "high",
+        "strength": 1.0
+      }
+    ]
+  },
+  "one_person_dark": {
+    "lighting_percent": 50.0,
+    "ventilation_percent": 25.0,
+    "mamdani_centroids": {
+      "lighting": 50.0,
+      "ventilation": 25.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 1.0,
+      "temperature": 24.0,
+      "light": 20.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 1.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 1.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L02",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "dark"
+        },
+        "then": "medium",
+        "strength": 1.0
+      },
+      {
+        "id": "V11",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "low",
+        "strength": 1.0
+      }
+    ]
+  },
+  "three_people_dark": {
+    "lighting_percent": 90.00011111111111,
+    "ventilation_percent": 55.0,
+    "mamdani_centroids": {
+      "lighting": 90.00011111111111,
+      "ventilation": 55.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 3.0,
+      "temperature": 24.0,
+      "light": 20.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 1.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L05",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "dark"
+        },
+        "then": "high",
+        "strength": 1.0
+      },
+      {
+        "id": "V20",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "medium",
+        "strength": 1.0
+      }
+    ]
+  },
+  "three_people_bright": {
+    "lighting_percent": 3.3329999999999997,
+    "ventilation_percent": 55.0,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 55.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 3.0,
+      "temperature": 24.0,
+      "light": 700.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 1.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.0,
+        "adequate": 0.0,
+        "bright": 1.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L07",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "bright"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V20",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "medium",
+        "strength": 1.0
+      }
+    ]
+  },
+  "crowded_hot_poor_co2": {
+    "lighting_percent": 90.00011111111111,
+    "ventilation_percent": 90.00011111111111,
+    "mamdani_centroids": {
+      "lighting": 90.00011111111111,
+      "ventilation": 90.00011111111111
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 3.0,
+      "temperature": 32.0,
+      "light": 20.0,
+      "co2": 1600.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.0,
+        "hot": 1.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 0.0,
+        "moderate": 0.0,
+        "poor": 1.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L05",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "dark"
+        },
+        "then": "high",
+        "strength": 1.0
+      },
+      {
+        "id": "V27",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "poor",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 1.0
+      }
+    ]
+  },
+  "one_person_bright": {
+    "lighting_percent": 3.3329999999999997,
+    "ventilation_percent": 25.0,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 25.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 1.0,
+      "temperature": 24.0,
+      "light": 700.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 1.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 1.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.0,
+        "adequate": 0.0,
+        "bright": 1.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L04",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "bright"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V11",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "low",
+        "strength": 1.0
+      }
+    ]
+  },
+  "empty_hot_fresh": {
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.3329999999999997,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.3329999999999997
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 35.0,
+      "light": 20.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.0,
+        "hot": 1.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V03",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "hot"
+        },
+        "then": "idle",
+        "strength": 1.0
+      }
+    ]
+  },
+  "occupied_cool_fresh": {
+    "lighting_percent": 50.0,
+    "ventilation_percent": 55.0,
+    "mamdani_centroids": {
+      "lighting": 50.0,
+      "ventilation": 55.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 2.0,
+      "temperature": 16.0,
+      "light": 200.0,
+      "co2": 450.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 1.0,
+        "comfortable": 0.0,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.0,
+        "adequate": 1.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L06",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "adequate"
+        },
+        "then": "medium",
+        "strength": 1.0
+      },
+      {
+        "id": "V19",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "cool"
+        },
+        "then": "medium",
+        "strength": 1.0
+      }
+    ]
+  },
+  "overlapping_memberships": {
+    "lighting_percent": 53.74186179013805,
+    "ventilation_percent": 66.46872482304558,
+    "mamdani_centroids": {
+      "lighting": 53.74186179013805,
+      "ventilation": 66.46872482304558
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 1.5,
+      "temperature": 27.0,
+      "light": 100.0,
+      "co2": 1150.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.5,
+        "high": 0.5
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.25,
+        "hot": 0.25
+      },
+      "light": {
+        "dark": 0.5,
+        "adequate": 0.3333333333333333,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 0.0,
+        "moderate": 0.42857142857142855,
+        "poor": 0.125
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L02",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "dark"
+        },
+        "then": "medium",
+        "strength": 0.5
+      },
+      {
+        "id": "L03",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "adequate"
+        },
+        "then": "dim",
+        "strength": 0.3333333333333333
+      },
+      {
+        "id": "L05",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "dark"
+        },
+        "then": "high",
+        "strength": 0.5
+      },
+      {
+        "id": "L06",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "adequate"
+        },
+        "then": "medium",
+        "strength": 0.3333333333333333
+      },
+      {
+        "id": "V14",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "moderate",
+          "temperature": "comfortable"
+        },
+        "then": "medium",
+        "strength": 0.25
+      },
+      {
+        "id": "V15",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "moderate",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.25
+      },
+      {
+        "id": "V17",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "poor",
+          "temperature": "comfortable"
+        },
+        "then": "high",
+        "strength": 0.125
+      },
+      {
+        "id": "V18",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "poor",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.125
+      },
+      {
+        "id": "V23",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "moderate",
+          "temperature": "comfortable"
+        },
+        "then": "high",
+        "strength": 0.25
+      },
+      {
+        "id": "V24",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "moderate",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.25
+      },
+      {
+        "id": "V26",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "poor",
+          "temperature": "comfortable"
+        },
+        "then": "high",
+        "strength": 0.125
+      },
+      {
+        "id": "V27",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "poor",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.125
+      }
+    ]
+  },
+  "above_domain_clipped": {
+    "lighting_percent": 3.3329999999999997,
+    "ventilation_percent": 90.00011111111111,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 90.00011111111111
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [
+      {
+        "input": "temperature",
+        "supplied": 45.0,
+        "used": 40.0
+      },
+      {
+        "input": "light",
+        "supplied": 1200.0,
+        "used": 1000.0
+      },
+      {
+        "input": "co2",
+        "supplied": 2500.0,
+        "used": 2000.0
+      }
+    ],
+    "inputs_used": {
+      "occupancy": 3.0,
+      "temperature": 40.0,
+      "light": 1000.0,
+      "co2": 2000.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.0,
+        "hot": 1.0
+      },
+      "light": {
+        "dark": 0.0,
+        "adequate": 0.0,
+        "bright": 1.0
+      },
+      "co2": {
+        "fresh": 0.0,
+        "moderate": 0.0,
+        "poor": 1.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L07",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "bright"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V27",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "poor",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 1.0
+      }
+    ]
+  }
+}

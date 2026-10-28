@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+work/
+.DS_Store
+.vscode/
+.idea/

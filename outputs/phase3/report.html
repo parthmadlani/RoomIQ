@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SC Project: Phase 3</title><style>
+body{background:#eef2f5;color:#172b40;font:16px/1.6 system-ui;margin:0}main{max-width:1100px;margin:auto;padding:35px 24px}
+section{background:white;border-radius:8px;padding:24px;margin:24px 0}img{width:100%;height:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:9px;border-bottom:1px solid #dde4e8;text-align:left}
+th{background:#e8f2f1}.scroll{overflow:auto}a{color:#166e75}.note{border-left:4px solid #da9439;padding-left:18px}
+</style><body><main><p>SOFT COMPUTING MINOR PROJECT / PHASE 3</p><h1>Genetic Algorithm sensor selection</h1>
+<section><h2>4 of 15 input channels selected</h2><p>S1_Light, S5_CO2, S6_PIR, S7_PIR</p>
+<p>Chromosome: <strong>000010000000111</strong>. Three GA runs; 318 distinct subsets evaluated.</p>
+<p>Validation macro F1 decreased: 0.8608 → 0.7952.
+Selected-model accuracy: 92.79%.</p>
+<p class="note">Later-test balanced accuracy: 40.83%.
+No true class 1 occurs in that test. External comparisons reuse data seen in earlier phases;
+they are not independent confirmation. Fewer inputs do not establish hardware or energy savings.</p>
+<p><a href="../../docs/phase3_notes.md">Method and viva notes</a> /
+<a href="../../docs/phase3_protocol.json">Fixed protocol</a> /
+<a href="../../models/phase3/selection_locked.json">Locked selection</a></p></section>
+<section><h2>How selection works</h2><p>Fitness = training-only pooled OOF macro F1 − 0.05 × inputs / 15.
+Four purged time blocks from December 22 supply the predictions. Tournament selection,
+one-point crossover, bit-flip mutation and two elites evolve 16 chromosomes for 10 generations.</p>
+<p>The inner blocks allow training on either side of a held-out time block; this evaluates
+within-day interpolation, not forecasting. Eighty trees are used during search and 300 for final comparison.</p></section>
+<section><h2>GA convergence across three seeds</h2><img src="plots/convergence.png" alt="GA convergence across three seeds"></section><section><h2>Prediction and subset-size trade-off</h2><img src="plots/subset_tradeoff.png" alt="Prediction and subset-size trade-off"></section><section><h2>Selected channels</h2><img src="plots/selected_sensors.png" alt="Selected channels"></section><section><h2>Comparison using unchanged external partitions</h2><img src="plots/external_comparison.png" alt="Comparison using unchanged external partitions"></section><section><h2>Selected-model validation errors</h2><img src="plots/selected_validation_confusion.png" alt="Selected-model validation errors"></section><section><h2>Selected-model later-test errors</h2><img src="plots/selected_test_confusion.png" alt="Selected-model later-test errors"></section><section><h2>Full metrics</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>partition</th>
+      <th>rows</th>
+      <th>accuracy</th>
+      <th>macro_f1_present_classes</th>
+      <th>macro_f1_all_four</th>
+      <th>balanced_accuracy_present_classes</th>
+      <th>weighted_f1</th>
+      <th>true_classes</th>
+      <th>input_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>baseline_15</td>
+      <td>train</td>
+      <td>1462</td>
+      <td>0.9979</td>
+      <td>0.9973</td>
+      <td>0.9973</td>
+      <td>0.9969</td>
+      <td>0.9979</td>
+      <td>0,1,2,3</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>baseline_15</td>
+      <td>validation</td>
+      <td>2760</td>
+      <td>0.9496</td>
+      <td>0.8608</td>
+      <td>0.8608</td>
+      <td>0.9119</td>
+      <td>0.9529</td>
+      <td>0,1,2,3</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>baseline_15</td>
+      <td>test</td>
+      <td>5870</td>
+      <td>0.9532</td>
+      <td>0.4159</td>
+      <td>n/a</td>
+      <td>0.3899</td>
+      <td>0.9394</td>
+      <td>0,2,3</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>baseline_15</td>
+      <td>january_test_subset</td>
+      <td>2045</td>
+      <td>0.8655</td>
+      <td>0.4047</td>
+      <td>n/a</td>
+      <td>0.3899</td>
+      <td>0.8277</td>
+      <td>0,2,3</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>ga_selected</td>
+      <td>train</td>
+      <td>1462</td>
+      <td>0.9904</td>
+      <td>0.9873</td>
+      <td>0.9873</td>
+      <td>0.9868</td>
+      <td>0.9904</td>
+      <td>0,1,2,3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>ga_selected</td>
+      <td>validation</td>
+      <td>2760</td>
+      <td>0.9279</td>
+      <td>0.7952</td>
+      <td>0.7952</td>
+      <td>0.8308</td>
+      <td>0.9303</td>
+      <td>0,1,2,3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>ga_selected</td>
+      <td>test</td>
+      <td>5870</td>
+      <td>0.9537</td>
+      <td>0.4369</td>
+      <td>n/a</td>
+      <td>0.4083</td>
+      <td>0.9399</td>
+      <td>0,2,3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>ga_selected</td>
+      <td>january_test_subset</td>
+      <td>2045</td>
+      <td>0.8670</td>
+      <td>0.4257</td>
+      <td>n/a</td>
+      <td>0.4083</td>
+      <td>0.8291</td>
+      <td>0,2,3</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>Present-class metrics cover only supported true classes. Training scores are diagnostics.
+The January subset overlaps the test.</p></section></main></body></html>

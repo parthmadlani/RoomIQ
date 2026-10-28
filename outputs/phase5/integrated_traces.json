@@ -1,0 +1,1034 @@
+[
+  {
+    "Source_Row": 1483,
+    "true_occupancy": 0,
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.628071967762075,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.628071967762075
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 25.38,
+      "light": 0.0,
+      "co2": 380.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.6550000000000002,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 0.6550000000000002
+      }
+    ],
+    "occupancy_model": "baseline",
+    "predicted_occupancy": 0,
+    "occupancy_probabilities": {
+      "0": 0.9999633313835312,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 3.666861646883411e-05
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 2834,
+    "true_occupancy": 1,
+    "lighting_percent": 40.85412445168111,
+    "ventilation_percent": 25.0,
+    "mamdani_centroids": {
+      "lighting": 40.85412445168111,
+      "ventilation": 25.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 1.0,
+      "temperature": 25.19,
+      "light": 93.0,
+      "co2": 360.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 1.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.7024999999999997,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.57,
+        "adequate": 0.2866666666666667,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L02",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "dark"
+        },
+        "then": "medium",
+        "strength": 0.57
+      },
+      {
+        "id": "L03",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "adequate"
+        },
+        "then": "dim",
+        "strength": 0.2866666666666667
+      },
+      {
+        "id": "V11",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "low",
+        "strength": 0.7024999999999997
+      }
+    ],
+    "occupancy_model": "baseline",
+    "predicted_occupancy": 1,
+    "occupancy_probabilities": {
+      "0": 0.010040431044069487,
+      "1": 0.8924305309014918,
+      "2": 0.09752903805443883,
+      "3": 0.0
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 2950,
+    "true_occupancy": 2,
+    "lighting_percent": 60.0648818447541,
+    "ventilation_percent": 55.0,
+    "mamdani_centroids": {
+      "lighting": 60.0648818447541,
+      "ventilation": 55.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 2.0,
+      "temperature": 25.69,
+      "light": 123.0,
+      "co2": 380.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.5774999999999997,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.27,
+        "adequate": 0.4866666666666667,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L05",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "dark"
+        },
+        "then": "high",
+        "strength": 0.27
+      },
+      {
+        "id": "L06",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "adequate"
+        },
+        "then": "medium",
+        "strength": 0.4866666666666667
+      },
+      {
+        "id": "V20",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "medium",
+        "strength": 0.5774999999999997
+      }
+    ],
+    "occupancy_model": "baseline",
+    "predicted_occupancy": 2,
+    "occupancy_probabilities": {
+      "0": 0.030921943111053847,
+      "1": 0.4111874168444697,
+      "2": 0.5434261531732121,
+      "3": 0.014464486871264226
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 3497,
+    "true_occupancy": 3,
+    "lighting_percent": 59.74326728787581,
+    "ventilation_percent": 74.40339961151506,
+    "mamdani_centroids": {
+      "lighting": 59.74326728787581,
+      "ventilation": 74.40339961151506
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 2.0,
+      "temperature": 26.19,
+      "light": 124.0,
+      "co2": 760.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.4524999999999997,
+        "hot": 0.04750000000000032
+      },
+      "light": {
+        "dark": 0.26,
+        "adequate": 0.49333333333333335,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 0.16,
+        "moderate": 0.45714285714285713,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L05",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "dark"
+        },
+        "then": "high",
+        "strength": 0.26
+      },
+      {
+        "id": "L06",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "adequate"
+        },
+        "then": "medium",
+        "strength": 0.49333333333333335
+      },
+      {
+        "id": "V20",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "medium",
+        "strength": 0.16
+      },
+      {
+        "id": "V21",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.04750000000000032
+      },
+      {
+        "id": "V23",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "moderate",
+          "temperature": "comfortable"
+        },
+        "then": "high",
+        "strength": 0.4524999999999997
+      },
+      {
+        "id": "V24",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "moderate",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.04750000000000032
+      }
+    ],
+    "occupancy_model": "baseline",
+    "predicted_occupancy": 2,
+    "occupancy_probabilities": {
+      "0": 0.011238000662032439,
+      "1": 0.04941100095662755,
+      "2": 0.5933621593575396,
+      "3": 0.34598883902380045
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 8086,
+    "true_occupancy": 3,
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.6739977890265902,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.6739977890265902
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 25.5,
+      "light": 10.0,
+      "co2": 370.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.625,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 0.625
+      }
+    ],
+    "occupancy_model": "baseline",
+    "predicted_occupancy": 0,
+    "occupancy_probabilities": {
+      "0": 0.526892474698248,
+      "1": 0.29614587387908614,
+      "2": 0.08470116820111871,
+      "3": 0.0922604832215471
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 8087,
+    "true_occupancy": 3,
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.6739977890265902,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.6739977890265902
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 25.5,
+      "light": 10.0,
+      "co2": 370.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.625,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 0.625
+      }
+    ],
+    "occupancy_model": "baseline",
+    "predicted_occupancy": 0,
+    "occupancy_probabilities": {
+      "0": 0.6134318022139825,
+      "1": 0.2956580793937622,
+      "2": 0.0625151587771475,
+      "3": 0.028394959615107844
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 1483,
+    "true_occupancy": 0,
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.628071967762075,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.628071967762075
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 25.38,
+      "light": 0.0,
+      "co2": 380.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.6550000000000002,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 0.6550000000000002
+      }
+    ],
+    "occupancy_model": "ga",
+    "predicted_occupancy": 0,
+    "occupancy_probabilities": {
+      "0": 1.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 2834,
+    "true_occupancy": 1,
+    "lighting_percent": 40.85412445168111,
+    "ventilation_percent": 25.0,
+    "mamdani_centroids": {
+      "lighting": 40.85412445168111,
+      "ventilation": 25.0
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 1.0,
+      "temperature": 25.19,
+      "light": 93.0,
+      "co2": 360.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 1.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.7024999999999997,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.57,
+        "adequate": 0.2866666666666667,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L02",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "dark"
+        },
+        "then": "medium",
+        "strength": 0.57
+      },
+      {
+        "id": "L03",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "adequate"
+        },
+        "then": "dim",
+        "strength": 0.2866666666666667
+      },
+      {
+        "id": "V11",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "low",
+        "strength": 0.7024999999999997
+      }
+    ],
+    "occupancy_model": "ga",
+    "predicted_occupancy": 1,
+    "occupancy_probabilities": {
+      "0": 0.025460792630060017,
+      "1": 0.8665539675161408,
+      "2": 0.10798523985379928,
+      "3": 0.0
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 2950,
+    "true_occupancy": 2,
+    "lighting_percent": 33.05876050388923,
+    "ventilation_percent": 25.000000000000004,
+    "mamdani_centroids": {
+      "lighting": 33.05876050388923,
+      "ventilation": 25.000000000000004
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 1.0,
+      "temperature": 25.69,
+      "light": 123.0,
+      "co2": 380.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 1.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.5774999999999997,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 0.27,
+        "adequate": 0.4866666666666667,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L02",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "dark"
+        },
+        "then": "medium",
+        "strength": 0.27
+      },
+      {
+        "id": "L03",
+        "output": "lighting",
+        "if": {
+          "occupancy": "low",
+          "light": "adequate"
+        },
+        "then": "dim",
+        "strength": 0.4866666666666667
+      },
+      {
+        "id": "V11",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "low",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "low",
+        "strength": 0.5774999999999997
+      }
+    ],
+    "occupancy_model": "ga",
+    "predicted_occupancy": 1,
+    "occupancy_probabilities": {
+      "0": 0.02,
+      "1": 0.8323292270966547,
+      "2": 0.1476707729033453,
+      "3": 0.0
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 3497,
+    "true_occupancy": 3,
+    "lighting_percent": 59.74326728787581,
+    "ventilation_percent": 74.40339961151506,
+    "mamdani_centroids": {
+      "lighting": 59.74326728787581,
+      "ventilation": 74.40339961151506
+    },
+    "lighting_exact_off_applied": false,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 2.0,
+      "temperature": 26.19,
+      "light": 124.0,
+      "co2": 760.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 0.0,
+        "low": 0.0,
+        "high": 1.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.4524999999999997,
+        "hot": 0.04750000000000032
+      },
+      "light": {
+        "dark": 0.26,
+        "adequate": 0.49333333333333335,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 0.16,
+        "moderate": 0.45714285714285713,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L05",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "dark"
+        },
+        "then": "high",
+        "strength": 0.26
+      },
+      {
+        "id": "L06",
+        "output": "lighting",
+        "if": {
+          "occupancy": "high",
+          "light": "adequate"
+        },
+        "then": "medium",
+        "strength": 0.49333333333333335
+      },
+      {
+        "id": "V20",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "medium",
+        "strength": 0.16
+      },
+      {
+        "id": "V21",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "fresh",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.04750000000000032
+      },
+      {
+        "id": "V23",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "moderate",
+          "temperature": "comfortable"
+        },
+        "then": "high",
+        "strength": 0.4524999999999997
+      },
+      {
+        "id": "V24",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "high",
+          "co2": "moderate",
+          "temperature": "hot"
+        },
+        "then": "high",
+        "strength": 0.04750000000000032
+      }
+    ],
+    "occupancy_model": "ga",
+    "predicted_occupancy": 2,
+    "occupancy_probabilities": {
+      "0": 0.0,
+      "1": 0.07267068042035098,
+      "2": 0.8927868166110134,
+      "3": 0.03454250296863572
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 8086,
+    "true_occupancy": 3,
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.6739977890265902,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.6739977890265902
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 25.5,
+      "light": 10.0,
+      "co2": 370.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.625,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 0.625
+      }
+    ],
+    "occupancy_model": "ga",
+    "predicted_occupancy": 0,
+    "occupancy_probabilities": {
+      "0": 0.7127721771561875,
+      "1": 0.18327629112633573,
+      "2": 0.012794972863088009,
+      "3": 0.0911565588543888
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  },
+  {
+    "Source_Row": 8087,
+    "true_occupancy": 3,
+    "lighting_percent": 0.0,
+    "ventilation_percent": 3.6739977890265902,
+    "mamdani_centroids": {
+      "lighting": 3.3329999999999997,
+      "ventilation": 3.6739977890265902
+    },
+    "lighting_exact_off_applied": true,
+    "input_clipping": [],
+    "inputs_used": {
+      "occupancy": 0.0,
+      "temperature": 25.5,
+      "light": 10.0,
+      "co2": 370.0
+    },
+    "memberships": {
+      "occupancy": {
+        "empty": 1.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "temperature": {
+        "cool": 0.0,
+        "comfortable": 0.625,
+        "hot": 0.0
+      },
+      "light": {
+        "dark": 1.0,
+        "adequate": 0.0,
+        "bright": 0.0
+      },
+      "co2": {
+        "fresh": 1.0,
+        "moderate": 0.0,
+        "poor": 0.0
+      }
+    },
+    "fired_rules": [
+      {
+        "id": "L01",
+        "output": "lighting",
+        "if": {
+          "occupancy": "empty"
+        },
+        "then": "off",
+        "strength": 1.0
+      },
+      {
+        "id": "V02",
+        "output": "ventilation",
+        "if": {
+          "occupancy": "empty",
+          "co2": "fresh",
+          "temperature": "comfortable"
+        },
+        "then": "idle",
+        "strength": 0.625
+      }
+    ],
+    "occupancy_model": "ga",
+    "predicted_occupancy": 0,
+    "occupancy_probabilities": {
+      "0": 0.7706088084647462,
+      "1": 0.120091956624564,
+      "2": 0.07931264069819309,
+      "3": 0.02998659421249674
+    },
+    "controller_measurement_sources": {
+      "temperature": "S1_Temp",
+      "light": "S1_Light",
+      "co2": "S5_CO2"
+    }
+  }
+]

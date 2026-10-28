@@ -1,0 +1,10 @@
+{
+  "config_sha256": "b82813c2fb1fde4f9fe043d831168c85871b11a8de3dd1770aac26503b3d7551",
+  "phase4_registry_sha256": "0e5162c7b6a1f446d6ef368f0a1691ae24c5b8aab5fd06748c3bd5529be9bab2",
+  "rules": 34,
+  "synthetic_scenarios": 11,
+  "integrated_example_rows": 12,
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "matplotlib": "3.10.7"
+}

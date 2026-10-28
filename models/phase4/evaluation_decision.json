@@ -1,0 +1,13 @@
+{
+  "default_demo_model": "baseline",
+  "alternative": "ga",
+  "ga_input_reduction_percent": 73.33333333333333,
+  "validation_macro_f1_difference_ga_minus_baseline": -0.06553970049835856,
+  "conclusion": "GA reduces inputs but does not preserve the baseline's validation performance. Neither model resolves later-period false-empty errors.",
+  "do_not_claim": [
+    "GA universally improves accuracy",
+    "73.33% measured energy/cost savings",
+    "Independent new test confirmation",
+    "Reliable automatic control"
+  ]
+}

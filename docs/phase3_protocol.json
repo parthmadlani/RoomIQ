@@ -1,0 +1,26 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "population": 16,
+  "generations": 10,
+  "elites": 2,
+  "tournament_size": 3,
+  "crossover_probability": 0.8,
+  "mutation_per_bit": 0.06666666666666667,
+  "fitness": "pooled_out_of_fold_macro_f1 - 0.05 * selected_count / 15",
+  "sensor_penalty": 0.05,
+  "folds": 4,
+  "purge_minutes": 10,
+  "search_trees": 80,
+  "final_trees": 300,
+  "forest_seed": 42,
+  "training_scope": "Phase 2 train only (December 22, 2017)",
+  "cv": "Four contiguous equal-row held-out blocks; fit on remaining training-day rows outside a 10-minute buffer. Training may be on either side; interpolation, not forward forecast.",
+  "selection": "Highest training-only penalized fitness across three seeded runs; ties prefer fewer inputs then lexicographic chromosome. All-input reference evaluated with identical search estimator/folds.",
+  "holdouts": "Lock subset before evaluating Phase 2 validation/test. Both were previously seen in Phase 2; comparisons are descriptive, not new independent confirmation.",
+  "cost": "Input count is a proxy for complexity, not measured power, sensor price or number of sensor nodes.",
+  "search_limits": "Heuristic finite search, no global optimality guarantee; shared deterministic fitness cache."
+}

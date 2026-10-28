@@ -1,0 +1,58 @@
+{
+  "default_model": "baseline",
+  "reason": "Higher four-class validation macro F1; GA remains a compact comparison.",
+  "status": "Academic demonstration; later-period occupied detection is weak.",
+  "probabilities": "Uncalibrated class probabilities, not a confidence guarantee.",
+  "models": {
+    "baseline": {
+      "path": "models/phase2/random_forest_baseline.joblib",
+      "sha256": "ed33a7ad67b61589431b5506df200d85547643c315a2cd5d9b20e54e53c6c4b1",
+      "features": [
+        "S1_Temp",
+        "S2_Temp",
+        "S3_Temp",
+        "S4_Temp",
+        "S1_Light",
+        "S2_Light",
+        "S3_Light",
+        "S4_Light",
+        "S1_Sound",
+        "S2_Sound",
+        "S3_Sound",
+        "S4_Sound",
+        "S5_CO2",
+        "S6_PIR",
+        "S7_PIR"
+      ]
+    },
+    "ga": {
+      "path": "models/phase4/ga_occupancy_retrained.joblib",
+      "sha256": "746b713d7f041a65ebf15aabdf731221d6590beba7b721ff0410c3d52f162873",
+      "features": [
+        "S1_Light",
+        "S5_CO2",
+        "S6_PIR",
+        "S7_PIR"
+      ]
+    }
+  },
+  "classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "training_rows": 1462,
+  "processed_data_sha256": "a76c3179c29d0ac003a3811eab76ea48fb44f299433eb8fb8c0e773327efe4f9",
+  "split_sha256": "14bd422d854e2b1b85b895d03eab489f76f8efbd94ad2b9b61107eec3e0d58f5",
+  "phase3_selection_sha256": "06326410ade3d72cd8cbbcd03b609ae400995bad206506750c9e2f6ef47cb26b",
+  "phase4_protocol_sha256": "cb2e973af034cf165666220b829f2a975da747741652328954ef6cc82c328cef",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.7.2",
+    "joblib": "1.5.2"
+  },
+  "refit_matches_phase3_predictions_and_probabilities": true
+}

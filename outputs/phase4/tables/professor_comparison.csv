@@ -1,0 +1,3 @@
+model,input_channels,source_nodes,input_reduction_percent,validation_accuracy_percent,validation_macro_f1,later_test_accuracy_percent,later_test_balanced_accuracy_percent,later_test_false_empty_percent
+baseline,15,7,0.0,94.96376811594203,0.8607521598196274,95.31516183986372,38.98785641684053,62.585034013605444
+ga,4,4,73.33333333333333,92.78985507246377,0.7952124593212688,95.36626916524702,40.833467073235965,62.585034013605444

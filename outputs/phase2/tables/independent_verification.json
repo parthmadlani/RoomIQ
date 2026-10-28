@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "independent_checks": [
+    "Source, model and protocol hashes match",
+    "Every scored row matches its disjoint partition and true label",
+    "All confusion matrices and aggregate metrics recalculated from predictions",
+    "Saved-model predictions and probabilities match all scored records",
+    "Prediction CLI handles a four-class example and rejects a missing sensor",
+    "Report local links resolve"
+  ]
+}

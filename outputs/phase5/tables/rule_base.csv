@@ -1,0 +1,35 @@
+id,output,antecedent,consequent
+L01,lighting,occupancy is empty,off
+L02,lighting,occupancy is low AND light is dark,medium
+L03,lighting,occupancy is low AND light is adequate,dim
+L04,lighting,occupancy is low AND light is bright,off
+L05,lighting,occupancy is high AND light is dark,high
+L06,lighting,occupancy is high AND light is adequate,medium
+L07,lighting,occupancy is high AND light is bright,off
+V01,ventilation,occupancy is empty AND co2 is fresh AND temperature is cool,idle
+V02,ventilation,occupancy is empty AND co2 is fresh AND temperature is comfortable,idle
+V03,ventilation,occupancy is empty AND co2 is fresh AND temperature is hot,idle
+V04,ventilation,occupancy is empty AND co2 is moderate AND temperature is cool,medium
+V05,ventilation,occupancy is empty AND co2 is moderate AND temperature is comfortable,medium
+V06,ventilation,occupancy is empty AND co2 is moderate AND temperature is hot,medium
+V07,ventilation,occupancy is empty AND co2 is poor AND temperature is cool,high
+V08,ventilation,occupancy is empty AND co2 is poor AND temperature is comfortable,high
+V09,ventilation,occupancy is empty AND co2 is poor AND temperature is hot,high
+V10,ventilation,occupancy is low AND co2 is fresh AND temperature is cool,low
+V11,ventilation,occupancy is low AND co2 is fresh AND temperature is comfortable,low
+V12,ventilation,occupancy is low AND co2 is fresh AND temperature is hot,high
+V13,ventilation,occupancy is low AND co2 is moderate AND temperature is cool,medium
+V14,ventilation,occupancy is low AND co2 is moderate AND temperature is comfortable,medium
+V15,ventilation,occupancy is low AND co2 is moderate AND temperature is hot,high
+V16,ventilation,occupancy is low AND co2 is poor AND temperature is cool,high
+V17,ventilation,occupancy is low AND co2 is poor AND temperature is comfortable,high
+V18,ventilation,occupancy is low AND co2 is poor AND temperature is hot,high
+V19,ventilation,occupancy is high AND co2 is fresh AND temperature is cool,medium
+V20,ventilation,occupancy is high AND co2 is fresh AND temperature is comfortable,medium
+V21,ventilation,occupancy is high AND co2 is fresh AND temperature is hot,high
+V22,ventilation,occupancy is high AND co2 is moderate AND temperature is cool,high
+V23,ventilation,occupancy is high AND co2 is moderate AND temperature is comfortable,high
+V24,ventilation,occupancy is high AND co2 is moderate AND temperature is hot,high
+V25,ventilation,occupancy is high AND co2 is poor AND temperature is cool,high
+V26,ventilation,occupancy is high AND co2 is poor AND temperature is comfortable,high
+V27,ventilation,occupancy is high AND co2 is poor AND temperature is hot,high

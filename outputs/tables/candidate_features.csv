@@ -1,0 +1,16 @@
+candidate_input,unit,reason
+S1_Temp,degrees C,Local temperature and spatial variation; also sensitive to ambient conditions.
+S2_Temp,degrees C,Local temperature and spatial variation; also sensitive to ambient conditions.
+S3_Temp,degrees C,Local temperature and spatial variation; also sensitive to ambient conditions.
+S4_Temp,degrees C,Local temperature and spatial variation; also sensitive to ambient conditions.
+S1_Light,lux,Local light information; association may depend on this room's lighting habits.
+S2_Light,lux,Local light information; association may depend on this room's lighting habits.
+S3_Light,lux,Local light information; association may depend on this room's lighting habits.
+S4_Light,lux,Local light information; association may depend on this room's lighting habits.
+S1_Sound,V,Local activity; amplifier voltage is not decibels.
+S2_Sound,V,Local activity; amplifier voltage is not decibels.
+S3_Sound,V,Local activity; amplifier voltage is not decibels.
+S4_Sound,V,Local activity; amplifier voltage is not decibels.
+S5_CO2,ppm,Direct CO2 concentration; may lag arrivals and persist after departures.
+S6_PIR,0/1,Motion coverage at this location; zero does not prove the room is empty.
+S7_PIR,0/1,Motion coverage at this location; zero does not prove the room is empty.

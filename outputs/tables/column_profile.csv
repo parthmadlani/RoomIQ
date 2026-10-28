@@ -1,0 +1,20 @@
+column,role,raw_dtype,processed_dtype,units,missing,unique_values,min,max,example,meaning
+Date,metadata,object,object,YYYY/MM/DD,0,7,2017/12/22,2018/01/11,2017/12/22,Recorded date; metadata only
+Time,metadata,object,object,HH:MM:SS,0,10129,00:00:28,23:59:58,10:49:41,Recorded time; timezone not supplied
+S1_Temp,sensor_related,float64,float64,degrees C,0,24,24.94,26.38,24.94,Temperature at node S1
+S2_Temp,sensor_related,float64,float64,degrees C,0,69,24.75,29.0,24.75,Temperature at node S2
+S3_Temp,sensor_related,float64,float64,degrees C,0,29,24.44,26.19,24.56,Temperature at node S3
+S4_Temp,sensor_related,float64,float64,degrees C,0,27,24.94,26.56,25.38,Temperature at node S4
+S1_Light,sensor_related,int64,int64,lux,0,68,0,165,121,Light at node S1
+S2_Light,sensor_related,int64,int64,lux,0,82,0,258,34,Light at node S2
+S3_Light,sensor_related,int64,int64,lux,0,177,0,280,53,Light at node S3
+S4_Light,sensor_related,int64,int64,lux,0,75,0,74,40,Light at node S4
+S1_Sound,sensor_related,float64,float64,V,0,231,0.06,3.88,0.08,"Sound amplifier voltage at node S1, not decibels"
+S2_Sound,sensor_related,float64,float64,V,0,185,0.04,3.44,0.19,"Sound amplifier voltage at node S2, not decibels"
+S3_Sound,sensor_related,float64,float64,V,0,258,0.04,3.67,0.06,"Sound amplifier voltage at node S3, not decibels"
+S4_Sound,sensor_related,float64,float64,V,0,106,0.05,3.4,0.06,"Sound amplifier voltage at node S4, not decibels"
+S5_CO2,sensor_related,int64,int64,ppm,0,186,345,1270,390,CO2 concentration at node S5
+S5_CO2_Slope,sensor_related,float64,float64,unspecified,0,1579,-6.29615384615,8.98076923077,0.769230769231,Supplied CO2 window slope; alignment and time units unverified
+S6_PIR,sensor_related,int64,int64,0/1,0,2,0,1,0,Motion detection at node S6; not a count of people
+S7_PIR,sensor_related,int64,int64,0/1,0,2,0,1,0,Motion detection at node S7; not a count of people
+Room_Occupancy_Count,target,int64,int64,people,0,4,0,3,1,"Manually recorded occupancy class, 0 to 3"

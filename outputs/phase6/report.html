@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SC Project: Phase 6</title><style>
+body{background:#eef2f5;color:#172b40;font:16px/1.6 system-ui;margin:0}main{max-width:1100px;margin:auto;padding:35px 24px}
+section{background:white;border-radius:8px;padding:24px;margin:24px 0}img{width:100%;height:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:9px;border-bottom:1px solid #dde4e8;text-align:left}
+th{background:#e8f2f1}.scroll{overflow:auto}a{color:#166e75}.note{border-left:4px solid #da9439;padding-left:18px}
+</style><body><main><p>SOFT COMPUTING MINOR PROJECT / PHASE 6</p><h1>Simulated energy and adaptive modes</h1>
+<section><h2>Declared loads: 60 W lighting + 40 W ventilation</h2><p>ECO, NORMAL and COMFORT adjust the
+fuzzy requests. AUTO selects among them using explicit occupancy, temperature and CO2 rules.</p>
+<p class="note">All energy is simulated. The full-power comparator is assumed, not measured.
+Baseline AUTO requests zero lighting for 1.549 occupied hours in
+covered test intervals. Do not treat withheld service as a demonstrated efficiency gain.</p>
+<p>9,950 eligible intervals cover 84.681 hours.
+Long gaps, embargo intervals and the unknown final duration are excluded.</p>
+<p><a href="../../docs/phase6_notes.md">Methods and viva notes</a> /
+<a href="../../config/phase6_energy.json">Power and mode assumptions</a> /
+<a href="tables/interval_audit.csv">Interval audit</a></p></section>
+<section><h2>AUTO comparison on identical later-test intervals</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>source</th>
+      <th>covered_hours</th>
+      <th>simulated_kwh</th>
+      <th>full_power_reference_kwh</th>
+      <th>simulated_reduction_percent</th>
+      <th>occupied_zero_lighting_hours</th>
+      <th>occupied_zero_lighting_percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>baseline</td>
+      <td>49.30222</td>
+      <td>0.14745</td>
+      <td>4.93022</td>
+      <td>97.00920</td>
+      <td>1.54889</td>
+      <td>62.53926</td>
+    </tr>
+    <tr>
+      <td>ga</td>
+      <td>49.30222</td>
+      <td>0.14745</td>
+      <td>4.93022</td>
+      <td>97.00920</td>
+      <td>1.54889</td>
+      <td>62.53926</td>
+    </tr>
+    <tr>
+      <td>true_label_reference</td>
+      <td>49.30222</td>
+      <td>0.27383</td>
+      <td>4.93022</td>
+      <td>94.44583</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>True-label reference is counterfactual, not a deployable predictor or measured correct control.
+Present data have already been explored; these are descriptive simulations.</p></section>
+<section><h2>Later-test simulated energy</h2><img src="plots/energy_comparison.png" alt="Later-test simulated energy"></section><section><h2>Reduction against the assumed comparator</h2><img src="plots/simulated_reduction.png" alt="Reduction against the assumed comparator"></section><section><h2>Read energy together with occupancy errors</h2><img src="plots/occupied_zero_lighting.png" alt="Read energy together with occupancy errors"></section><section><h2>AUTO mode durations</h2><img src="plots/auto_modes.png" alt="AUTO mode durations"></section><section><h2>Accumulation over covered hours</h2><img src="plots/cumulative_energy.png" alt="Accumulation over covered hours"></section><section><h2>Power-assumption sensitivity</h2><img src="plots/power_sensitivity.png" alt="Power-assumption sensitivity"></section><section><h2>Accounting coverage</h2><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>status</th>
+      <th>interval_rows</th>
+      <th>known_elapsed_seconds</th>
+      <th>accounted_seconds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>eligible</td>
+      <td>9950</td>
+      <td>304850.0</td>
+      <td>304850.0</td>
+    </tr>
+    <tr>
+      <td>recording_gap_over_60s</td>
+      <td>141</td>
+      <td>1415445.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>touches_embargo</td>
+      <td>37</td>
+      <td>1133.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>final_row_unknown_duration</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>No HVAC, standby, sensor-node or processor/network energy is included. Real fan/dimmer dynamics and
+physical environmental feedback are not modelled. Phase 7 dashboard integration has not started.</p></section></main></body></html>

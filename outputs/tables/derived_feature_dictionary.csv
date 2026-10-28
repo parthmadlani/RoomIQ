@@ -1,0 +1,8 @@
+field,dtype,definition,purpose
+Timestamp,datetime64[ns],"Date + Time, strict parsing; timezone unknown",Audit and future splits
+Source_Row,int64,Original CSV line number starting at 2,Traceability
+Recording_Segment,int64,New group after gap > 600 seconds,"Descriptive grouping, not experimental label"
+Avg_Temp,float64,(S1_Temp + S2_Temp + S3_Temp + S4_Temp) / 4,"Optional compact feature, degrees C"
+Avg_Light,float64,(S1_Light + S2_Light + S3_Light + S4_Light) / 4,"Optional compact feature, lux"
+Avg_Sound,float64,(S1_Sound + S2_Sound + S3_Sound + S4_Sound) / 4,"Optional compact feature, V"
+PIR_Any,int64,"max(S6_PIR, S7_PIR)","Logical OR, not a people count"

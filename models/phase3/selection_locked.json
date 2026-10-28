@@ -1,0 +1,80 @@
+{
+  "features": [
+    "S1_Light",
+    "S5_CO2",
+    "S6_PIR",
+    "S7_PIR"
+  ],
+  "all_features": [
+    "S1_Temp",
+    "S2_Temp",
+    "S3_Temp",
+    "S4_Temp",
+    "S1_Light",
+    "S2_Light",
+    "S3_Light",
+    "S4_Light",
+    "S1_Sound",
+    "S2_Sound",
+    "S3_Sound",
+    "S4_Sound",
+    "S5_CO2",
+    "S6_PIR",
+    "S7_PIR"
+  ],
+  "winner": {
+    "seed": 44,
+    "chromosome": "000010000000111",
+    "selected_count": 4,
+    "cv_macro_f1": 0.7416718568800056,
+    "fitness": 0.7283385235466723
+  },
+  "reference": {
+    "chromosome": "111111111111111",
+    "selected_count": 15,
+    "cv_macro_f1": 0.45528692367441637,
+    "fitness": 0.4052869236744164
+  },
+  "seeds": [
+    {
+      "seed": 42,
+      "chromosome": "000101000001100",
+      "selected_count": 4,
+      "cv_macro_f1": 0.6082532469829509,
+      "fitness": 0.5949199136496176
+    },
+    {
+      "seed": 43,
+      "chromosome": "000101000001110",
+      "selected_count": 5,
+      "cv_macro_f1": 0.6620463462963655,
+      "fitness": 0.6453796796296988
+    },
+    {
+      "seed": 44,
+      "chromosome": "000010000000111",
+      "selected_count": 4,
+      "cv_macro_f1": 0.7416718568800056,
+      "fitness": 0.7283385235466723
+    }
+  ],
+  "unique_subsets_evaluated": 318,
+  "selection_rule": "Highest training-only penalized fitness across three seeded runs; ties prefer fewer inputs then lexicographic chromosome. All-input reference evaluated with identical search estimator/folds.",
+  "search_estimator": {
+    "n_estimators": 80,
+    "min_samples_leaf": 2,
+    "max_features": "sqrt",
+    "class_weight": "balanced_subsample",
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "protocol_sha256": "75595cf65c4f35bdb1f67875e5e49122f022b4efaf9b1251ad95156bdf6b4c66",
+  "training_source_rows_sha256": "426bc050eced2e26cbbdac7a1f9a1067e281214933a6a3f6c2f805b77d48c20c",
+  "holdout_access": "Selected and saved before downstream validation/test prediction.",
+  "selected_nodes": [
+    "S1",
+    "S5",
+    "S6",
+    "S7"
+  ]
+}

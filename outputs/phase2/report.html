@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SC Project: Phase 2</title><style>
+body{background:#eef2f5;color:#172b40;font:16px/1.6 system-ui;margin:0}main{max-width:1100px;margin:auto;padding:35px 24px}
+h1{font-size:34px}section{background:white;border-radius:8px;padding:24px;margin:24px 0}
+img{width:100%;height:auto}table{border-collapse:collapse;width:100%;font-size:13px}
+td,th{padding:9px;border-bottom:1px solid #dce5e9;text-align:left}th{background:#e8f2f1}
+.scroll{overflow:auto}a{color:#166e75}.note{border-left:4px solid #da9439;padding-left:18px}
+</style><body><main><p>SOFT COMPUTING MINOR PROJECT / PHASE 2</p><h1>Baseline occupancy prediction</h1>
+<p>15 sensor inputs. Random Forest. Chronological evaluation.</p>
+<section><h2>Validation accuracy: 94.96%</h2><p>Four-class macro F1: <strong>0.8608</strong>.
+Always-empty validation accuracy: 71.67%.</p>
+<p class="note">Later-test accuracy is 95.32%, but the test has no true class 1.
+Its scores cannot establish one-person detection.</p>
+<p class="note"><strong>Later-period occupied detection is weak:</strong> balanced accuracy is
+38.99%, versus 33.33% for always empty.
+Two-person recall is 13.98% and three-person recall is 2.99%. Always-empty accuracy is
+94.99%. High overall accuracy hides these failures.</p><p>All data were explored in Phase 1;
+the test is excluded from fitting and tuning.</p>
+<p><a href="../../docs/phase2_notes.md">Methods and viva notes</a> /
+<a href="../../docs/phase2_protocol.json">Fixed protocol</a> /
+<a href="tables/metrics.csv">Full metrics</a></p></section>
+<section><h2>Results</h2><div class="scroll"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>partition</th>
+      <th>rows</th>
+      <th>accuracy</th>
+      <th>macro_f1_present_classes</th>
+      <th>macro_f1_all_four</th>
+      <th>balanced_accuracy_present_classes</th>
+      <th>weighted_f1</th>
+      <th>true_classes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>random_forest</td>
+      <td>train</td>
+      <td>1462</td>
+      <td>0.9979</td>
+      <td>0.9973</td>
+      <td>0.9973</td>
+      <td>0.9969</td>
+      <td>0.9979</td>
+      <td>0,1,2,3</td>
+    </tr>
+    <tr>
+      <td>random_forest</td>
+      <td>validation</td>
+      <td>2760</td>
+      <td>0.9496</td>
+      <td>0.8608</td>
+      <td>0.8608</td>
+      <td>0.9119</td>
+      <td>0.9529</td>
+      <td>0,1,2,3</td>
+    </tr>
+    <tr>
+      <td>random_forest</td>
+      <td>test</td>
+      <td>5870</td>
+      <td>0.9532</td>
+      <td>0.4159</td>
+      <td>n/a</td>
+      <td>0.3899</td>
+      <td>0.9394</td>
+      <td>0,2,3</td>
+    </tr>
+    <tr>
+      <td>random_forest</td>
+      <td>january_test_subset</td>
+      <td>2045</td>
+      <td>0.8655</td>
+      <td>0.4047</td>
+      <td>n/a</td>
+      <td>0.3899</td>
+      <td>0.8277</td>
+      <td>0,2,3</td>
+    </tr>
+    <tr>
+      <td>always_empty</td>
+      <td>train</td>
+      <td>1462</td>
+      <td>0.4357</td>
+      <td>0.1517</td>
+      <td>0.1517</td>
+      <td>0.2500</td>
+      <td>0.2645</td>
+      <td>0,1,2,3</td>
+    </tr>
+    <tr>
+      <td>always_empty</td>
+      <td>validation</td>
+      <td>2760</td>
+      <td>0.7167</td>
+      <td>0.2087</td>
+      <td>0.2087</td>
+      <td>0.2500</td>
+      <td>0.5984</td>
+      <td>0,1,2,3</td>
+    </tr>
+    <tr>
+      <td>always_empty</td>
+      <td>test</td>
+      <td>5870</td>
+      <td>0.9499</td>
+      <td>0.3248</td>
+      <td>n/a</td>
+      <td>0.3333</td>
+      <td>0.9255</td>
+      <td>0,2,3</td>
+    </tr>
+    <tr>
+      <td>always_empty</td>
+      <td>january_test_subset</td>
+      <td>2045</td>
+      <td>0.8562</td>
+      <td>0.3075</td>
+      <td>n/a</td>
+      <td>0.3333</td>
+      <td>0.7899</td>
+      <td>0,2,3</td>
+    </tr>
+  </tbody>
+</table></div>
+<p>Macro F1 and balanced accuracy labelled “present classes” average only classes with true support.
+Training scores are diagnostics. January is a subset of the later test, not independent evidence.</p></section>
+<section><h2>Class coverage</h2><img src="plots/split_coverage.png" alt="Class coverage"></section><section><h2>Compare with always empty</h2><img src="plots/baseline_comparison.png" alt="Compare with always empty"></section><section><h2>Validation: all four classes</h2><img src="plots/validation_confusion.png" alt="Validation: all four classes"></section><section><h2>Later test: class 1 absent</h2><img src="plots/test_confusion.png" alt="Later test: class 1 absent"></section><section><h2>Training feature importance</h2><img src="plots/feature_importance.png" alt="Training feature importance"></section><section><h2>What is saved</h2><p>Model, input specification, source hashes, split manifest,
+row-level predictions, per-class metrics and plots. The saved model uses only December 22 training data.</p>
+<p>Feature importance is a training diagnostic. No GA, fuzzy controller or measured energy-savings
+claim is included.</p></section></main></body></html>

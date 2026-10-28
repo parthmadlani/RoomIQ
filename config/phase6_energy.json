@@ -1,0 +1,39 @@
+{
+  "loads": {
+    "lighting_max_w": 60,
+    "ventilation_max_w": 40
+  },
+  "power_model": "Linear duty-equivalent power: rated_w * requested_percent / 100. This is an illustrative assumption, not a measured fan/dimmer power curve.",
+  "excluded_loads": [
+    "HVAC",
+    "sensor nodes",
+    "network/processor",
+    "standby power"
+  ],
+  "reference": "Both modelled loads at 100% for exactly the same eligible intervals. This is an assumed full-power comparator, not measured conventional consumption.",
+  "max_interval_seconds": 60,
+  "interval_method": "Left endpoint zero-order hold. Exclude final row, gaps over 60 seconds, embargo rows, and intervals crossing Phase 2 partitions.",
+  "modes": {
+    "ECO": {
+      "lighting_scale": 0.8,
+      "ventilation_scale": 0.8
+    },
+    "NORMAL": {
+      "lighting_scale": 1,
+      "ventilation_scale": 1
+    },
+    "COMFORT": {
+      "lighting_scale": 1.15,
+      "ventilation_scale": 1.15
+    }
+  },
+  "auto_policy": {
+    "co2_comfort_threshold_ppm": 1100,
+    "occupied_hot_threshold_c": 28,
+    "high_occupancy_threshold": 2,
+    "description": "COMFORT if CO2 >= 1100, or occupancy >= 2, or occupied and temperature >= 28; otherwise NORMAL if occupied, else ECO."
+  },
+  "ventilation_guard": "If CO2 >= 1100 ppm, applied ventilation may not fall below the original fuzzy request, even in ECO. Illustrative guard, not a safety or air-quality guarantee.",
+  "input_limit": "Request percentages must be finite in [0,100]; environment thresholds are project choices. AUTO is deterministic rule-based adaptation, not learning.",
+  "interpretation": "Energy and savings are simulated. No comfort validation, closed-loop environmental response or physical device control."
+}

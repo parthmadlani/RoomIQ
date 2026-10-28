@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Data, split, selected subset and registered model hashes match",
+    "Fresh GA model and unchanged baseline reproduce previous predictions",
+    "All multiclass, false-empty, count-error and paired metrics independently recalculated",
+    "Summary input counts and channel-reduction calculation verified",
+    "Both interfaces match saved predictions and class probabilities",
+    "Missing, nonnumeric, nonfinite, negative and invalid-PIR inputs rejected",
+    "Column order and extra target do not affect prediction; incomplete baseline never falls back",
+    "Both CLIs tested, including overwrite refusal",
+    "Report links and six figures verified"
+  ]
+}

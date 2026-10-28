@@ -1,0 +1,17 @@
+{
+  "source_url": "https://archive.ics.uci.edu/static/public/864/room%2Boccupancy%2Bestimation.zip",
+  "dataset_page": "https://archive.ics.uci.edu/dataset/864/room+occupancy+estimation",
+  "doi": "10.24432/C5P605",
+  "license": "CC BY 4.0",
+  "retrieved_at_utc": "2026-10-26T06:49:04.391358+00:00",
+  "files": {
+    "room_occupancy_estimation.zip": {
+      "bytes": 114333,
+      "sha256": "a0db79ee96ea297c22458ac77a28fba20d41246e75d24b2655ca3ab624cc08fd"
+    },
+    "Occupancy_Estimation.csv": {
+      "bytes": 931630,
+      "sha256": "c090ee5c94b61762bfec9d22767864490b51030f98cca030f02822468db25d9c"
+    }
+  }
+}

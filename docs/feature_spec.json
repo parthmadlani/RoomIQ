@@ -1,0 +1,67 @@
+{
+  "target": "Room_Occupancy_Count",
+  "classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "recommended_baseline": [
+    "S1_Temp",
+    "S2_Temp",
+    "S3_Temp",
+    "S4_Temp",
+    "S1_Light",
+    "S2_Light",
+    "S3_Light",
+    "S4_Light",
+    "S1_Sound",
+    "S2_Sound",
+    "S3_Sound",
+    "S4_Sound",
+    "S5_CO2",
+    "S6_PIR",
+    "S7_PIR"
+  ],
+  "optional_compact_comparison": [
+    "Avg_Temp",
+    "Avg_Light",
+    "Avg_Sound",
+    "S5_CO2",
+    "S6_PIR",
+    "S7_PIR"
+  ],
+  "supplied_sensor_features": [
+    "S1_Temp",
+    "S2_Temp",
+    "S3_Temp",
+    "S4_Temp",
+    "S1_Light",
+    "S2_Light",
+    "S3_Light",
+    "S4_Light",
+    "S1_Sound",
+    "S2_Sound",
+    "S3_Sound",
+    "S4_Sound",
+    "S5_CO2",
+    "S5_CO2_Slope",
+    "S6_PIR",
+    "S7_PIR"
+  ],
+  "conditional_feature": {
+    "S5_CO2_Slope": "Exclude until trailing-only window calculation is verified."
+  },
+  "excluded_metadata": [
+    "Date",
+    "Time",
+    "Timestamp",
+    "Source_Row",
+    "Recording_Segment"
+  ],
+  "eda_only_alternative": {
+    "PIR_Any": "OR of the two PIR channels; loses location information."
+  },
+  "row_order": "Same chronological row order in all three processed tables.",
+  "split_status": "No split or training. All rows used for descriptive EDA."
+}

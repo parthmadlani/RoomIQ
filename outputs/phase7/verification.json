@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "checks": 72,
+  "recorded_model_policy_cases": 48,
+  "manual_scenarios": 4,
+  "scope": "Pipeline parity, known scenarios, invalid inputs, HTTP routes and local-origin restriction.",
+  "limitation": "These checks verify implementation, not model generalization or real-world energy savings."
+}

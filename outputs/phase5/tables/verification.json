@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "grid_cases": 4459,
+  "rules_activated": 34,
+  "independent_centroid_cases": 40,
+  "max_centroid_error_percentage_points": 0.0003423108757143467,
+  "centroid_tolerance_percentage_points": 0.005,
+  "checks": [
+    "All membership terms independently matched; input/output universes covered",
+    "Every rule activated; no empty aggregate or out-of-range request on test grid",
+    "Centroids compared with independent exact piecewise-linear envelope integration",
+    "Empty-off, high-CO2 ventilation and dark/bright scenarios verified",
+    "Clipping disclosed; invalid values rejected",
+    "Both occupancy integration paths and CSV/trace CLIs verified",
+    "Ground-truth column ignored; missing GA temperature rejected",
+    "Earlier registry unchanged; report links and figures present"
+  ]
+}
